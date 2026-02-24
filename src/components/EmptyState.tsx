@@ -4,9 +4,9 @@ import { FilterType } from '../types/todo';
 import { COLORS, SPACING, TYPOGRAPHY } from '../constants/theme';
 
 const EMPTY_COPY: Record<FilterType, { emoji: string; title: string; sub: string }> = {
-  all: { emoji: '🎉', title: "You're all clear!", sub: 'Add a task above to get started.' },
-  pending: { emoji: '✅', title: 'Nothing pending!', sub: "You've completed everything." },
-  completed: { emoji: '📭', title: 'No completed tasks', sub: 'Complete some tasks to see them here.' },
+  all: { emoji: '', title: "You're all clear!", sub: 'Add a task above to get started.' },
+  pending: { emoji: '', title: 'Nothing pending!', sub: "You've completed everything." },
+  completed: { emoji: '', title: 'No completed tasks', sub: 'Complete some tasks to see them here.' },
 };
 
 const EmptyState: React.FC<{ filter: FilterType }> = ({ filter }) => {

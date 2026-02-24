@@ -1,8 +1,3 @@
-/**
- * Header — Static presentational header.
- * Displays greeting, date, and today's task count.
- * Background is the coral-red brand color (matching design reference).
- */
 
 import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
@@ -32,13 +27,13 @@ const Header: React.FC<Props> = ({ pendingCount }) => {
     <View style={styles.wrapper}>
       <View style={styles.topRow}>
         <View>
-          <Text style={styles.greeting}>{getGreeting()} 👋</Text>
+          <Text style={styles.greeting}>{getGreeting()} </Text>
           <Text style={styles.date}>{getFormattedDate()}</Text>
         </View>
 
-        {/* Avatar placeholder */}
+        {/* Avatar placeholder hard codded*/}
         <View style={styles.avatar}>
-          <Text style={styles.avatarText}>M</Text>
+          <Text style={styles.avatarText}>Ap</Text>
         </View>
       </View>
 

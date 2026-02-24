@@ -17,9 +17,9 @@ interface Props {
 }
 
 const PRIORITY_OPTIONS: { key: Priority; label: string; color: string }[] = [
-  { key: 'low', label: '🟢 Low', color: COLORS.priorityLow },
-  { key: 'medium', label: '🟡 Medium', color: COLORS.priorityMedium },
-  { key: 'high', label: '🔴 High', color: COLORS.priorityHigh },
+  { key: 'low', label: ' Low', color: COLORS.priorityLow },
+  { key: 'medium', label: ' Medium', color: COLORS.priorityMedium },
+  { key: 'high', label: ' High', color: COLORS.priorityHigh },
 ];
 
 const AddTodoInput: React.FC<Props> = ({ onAdd }) => {
