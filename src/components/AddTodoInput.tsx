@@ -147,7 +147,7 @@ const AddTodoInput: React.FC<Props> = ({ onAdd }) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: { marginHorizontal: SPACING.lg, marginBottom: SPACING.xl },
+  wrapper: { marginHorizontal: SPACING.lg, marginBottom: SPACING.xl, marginTop: SPACING.lg },
   card: {
     backgroundColor: COLORS.surface,
     borderRadius: RADIUS.xl,
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   optionSection: { gap: SPACING.xs },
   optionLabel: {
     ...TYPOGRAPHY.captionBold, color: COLORS.textSecondary,
-    textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4,
+    textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 0,
   },
   chips: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.xs },
   chip: {

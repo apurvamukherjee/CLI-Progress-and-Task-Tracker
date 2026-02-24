@@ -1,8 +1,8 @@
 export const COLORS = {
   // Primary coral-red like the design reference
-  primary: '#FF6B6B',
-  primaryDark: '#E85555',
-  primaryLight: '#FFE8E8',
+  primary: '#051c85ff',
+  primaryDark: '#00c3ffff',
+  primaryLight: '#a3e1f1a1',
 
   // Accent deep navy
   accent: '#1A1A2E',

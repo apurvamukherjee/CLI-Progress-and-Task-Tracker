@@ -10,7 +10,7 @@ function App(): React.JSX.Element {
       <StatusBar
         barStyle="light-content"
         backgroundColor={COLORS.primary}
-        translucent={false}
+        translucent={true}
       />
       <HomeScreen />
     </SafeAreaProvider>
