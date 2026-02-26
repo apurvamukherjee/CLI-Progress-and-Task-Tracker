@@ -1,5 +1,11 @@
 import React, { useRef, useCallback } from 'react';
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { FilterType } from '../types/todo';
 import { COLORS, RADIUS, SPACING, TYPOGRAPHY } from '../constants/theme';
 
@@ -34,11 +40,12 @@ const FilterTabs: React.FC<Props> = ({ active, onSelect, counts }) => {
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.track} onLayout={e => {
-        // Set initial position
-        const w = e.nativeEvent.layout.width;
-      }}>
-        {/* We use percentage-based positioning via flex — pill width = 1/3 */}
+      <View
+        style={styles.track}
+        onLayout={e => {
+          const w = e.nativeEvent.layout.width;
+        }}
+      >
         <View style={styles.pillContainer} pointerEvents="none">
           <Animated.View
             style={[
@@ -72,7 +79,12 @@ const FilterTabs: React.FC<Props> = ({ active, onSelect, counts }) => {
               </Text>
               {count > 0 && (
                 <View style={[styles.badge, isActive && styles.badgeActive]}>
-                  <Text style={[styles.badgeText, isActive && styles.badgeTextActive]}>
+                  <Text
+                    style={[
+                      styles.badgeText,
+                      isActive && styles.badgeTextActive,
+                    ]}
+                  >
                     {count}
                   </Text>
                 </View>
@@ -117,7 +129,12 @@ const styles = StyleSheet.create({
     paddingVertical: SPACING.sm,
     gap: 6,
   },
-  tabText: { ...TYPOGRAPHY.caption, fontWeight: '500', color: COLORS.textSecondary, fontSize: 13 },
+  tabText: {
+    ...TYPOGRAPHY.caption,
+    fontWeight: '500',
+    color: COLORS.textSecondary,
+    fontSize: 13,
+  },
   tabTextActive: { color: COLORS.textPrimary, fontWeight: '600' },
   badge: {
     backgroundColor: COLORS.border,
@@ -128,7 +145,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   badgeActive: { backgroundColor: COLORS.primaryLight },
-  badgeText: { ...TYPOGRAPHY.captionBold, color: COLORS.textMuted, fontSize: 10 },
+  badgeText: {
+    ...TYPOGRAPHY.captionBold,
+    color: COLORS.textMuted,
+    fontSize: 10,
+  },
   badgeTextActive: { color: COLORS.primary },
 });
 

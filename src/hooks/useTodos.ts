@@ -1,14 +1,3 @@
-/**
- * useTodos — Single source of truth for all todo state.
- *
- * Architecture:
- * - Pure functional, no class components
- * - AsyncStorage persistence on every mutation
- * - Derived filtered list computed at read time (no redundant state)
- * - Callbacks are memoized with useCallback to prevent child re-renders
- * - Storage calls are fire-and-forget async (non-blocking UI)
- */
-
 import { useState, useEffect, useCallback } from 'react';
 import { FilterType, Priority, Todo } from '../types/todo';
 import { storage } from '../utils/storage';
@@ -22,15 +11,12 @@ export function useTodos() {
   const [filter, setFilter] = useState<FilterType>('all');
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load persisted todos on mount
   useEffect(() => {
     storage.loadTodos().then(persisted => {
       setTodos(persisted);
       setIsLoading(false);
     });
   }, []);
-
-  // Persist whenever todos change (after initial load)
   useEffect(() => {
     if (!isLoading) {
       storage.saveTodos(todos);
@@ -91,7 +77,9 @@ export function useTodos() {
     pending: todos.filter(t => !t.completed).length,
     completionRate:
       todos.length > 0
-        ? Math.round((todos.filter(t => t.completed).length / todos.length) * 100)
+        ? Math.round(
+            (todos.filter(t => t.completed).length / todos.length) * 100,
+          )
         : 0,
   };
 

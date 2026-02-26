@@ -5,7 +5,6 @@ import {
   Platform,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -14,27 +13,14 @@ import { Todo } from '../types/todo';
 import { COLORS, RADIUS, SPACING } from '../constants/theme';
 
 import Header from '../components/Header';
-import TodoStats from '../components/TodoStats';
-import AddTodoInput from '../components/AddTodoInput';
 import TodoItem from '../components/TodoItem';
 import EmptyState from '../components/EmptyState';
 
-const HomeScreen: React.FC = () => {
-  const {
-    todos,
-    allTodos,
-    filter,
-    stats,
-    isLoading,
-    addTodo,
-    toggleTodo,
-    deleteTodo,
-    setFilter,
-    clearCompleted,
-  } = useTodos();
+const PendingScreen: React.FC = () => {
+  const { allTodos, stats, isLoading, toggleTodo, deleteTodo } = useTodos();
 
-  // HomeScreen always shows ALL todos
-  const displayTodos = allTodos;
+  // Filter to only pending (not completed) todos
+  const pendingTodos = allTodos.filter(todo => !todo.completed);
 
   const renderItem = useCallback(
     ({ item, index }: ListRenderItemInfo<Todo>) => (
@@ -51,27 +37,17 @@ const HomeScreen: React.FC = () => {
   const keyExtractor = useCallback((item: Todo) => item.id, []);
 
   const ListHeader = (
-    <>
-      <TodoStats stats={stats} />
-      <AddTodoInput onAdd={addTodo} />
-      <View style={styles.listHeader}>
-        <Text style={styles.listTitle}>All Tasks</Text>
-        {stats.completed > 0 && (
-          <TouchableOpacity onPress={clearCompleted}>
-            <Text style={styles.clearBtn}>Clear done</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    </>
+    <View style={styles.listHeader}>
+      <Text style={styles.listTitle}>Pending</Text>
+      <Text style={styles.countBadge}>{stats.pending} left</Text>
+    </View>
   );
 
   if (isLoading) {
     return (
       <SafeAreaView style={styles.loadingContainer} edges={['top']}>
         <Header pendingCount={0} />
-        <View style={styles.body}>
-          <View style={styles.loadingPlaceholder} />
-        </View>
+        <View style={styles.body} />
       </SafeAreaView>
     );
   }
@@ -81,11 +57,11 @@ const HomeScreen: React.FC = () => {
       <Header pendingCount={stats.pending} />
       <View style={styles.body}>
         <FlatList
-          data={displayTodos}
+          data={pendingTodos}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           ListHeaderComponent={ListHeader}
-          ListEmptyComponent={<EmptyState filter="all" />}
+          ListEmptyComponent={<EmptyState filter="pending" />}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.listContent}
           keyboardShouldPersistTaps="handled"
@@ -127,19 +103,12 @@ const styles = StyleSheet.create({
     color: COLORS.textPrimary,
     letterSpacing: -0.3,
   },
-  clearBtn: {
+  countBadge: {
     fontSize: 13,
-    color: COLORS.primary,
+    color: COLORS.textSecondary,
     fontWeight: '500',
   },
   loadingContainer: { flex: 1, backgroundColor: COLORS.primary },
-  loadingPlaceholder: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-    borderTopLeftRadius: RADIUS.xxl,
-    borderTopRightRadius: RADIUS.xxl,
-    marginTop: -RADIUS.xxl,
-  },
 });
 
-export default HomeScreen;
+export default PendingScreen;
